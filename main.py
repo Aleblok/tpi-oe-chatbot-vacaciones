@@ -1,5 +1,4 @@
 import csv
-import datetime
 
 
 def cargar_empleados():
@@ -14,52 +13,20 @@ def cargar_empleados():
     return empleados
 
 
-def validar_fecha(texto):
-    try:
-        dia, mes, anio = texto.split("/")
-        fecha = datetime.date(int(anio), int(mes), int(dia))
-        return fecha
-    except ValueError:
-        return None
-
-
 def main():
     print("=== CHATBOT DE GESTIÓN DE VACACIONES ===")
 
     empleados = cargar_empleados()
 
-    legajo = input("Ingrese su legajo: ").strip()
+    legajo = input("Ingrese su legajo: ")
 
     if legajo in empleados:
         empleado = empleados[legajo]
 
         print(f"Bienvenido/a {empleado['nombre']} {empleado['apellido']}")
-        print(f"Días disponibles: {empleado['dias_vacaciones']}")
-
-        fecha_inicio_texto = input("Ingrese fecha de inicio (dd/mm/yyyy): ").strip()
-        fecha_inicio = validar_fecha(fecha_inicio_texto)
-
-        if fecha_inicio is None:
-            print("Fecha de inicio inválida. Use el formato dd/mm/yyyy.")
-            return
-
-        fecha_fin_texto = input("Ingrese fecha de fin (dd/mm/yyyy): ").strip()
-        fecha_fin = validar_fecha(fecha_fin_texto)
-
-        if fecha_fin is None:
-            print("Fecha de fin inválida. Use el formato dd/mm/yyyy.")
-            return
-
-        if fecha_fin < fecha_inicio:
-            print("La fecha de fin no puede ser anterior a la fecha de inicio.")
-            return
-
-        dias_solicitados = (fecha_fin - fecha_inicio).days
-
-        print("Solicitud procesada correctamente.")
-        print(f"Fecha de inicio: {fecha_inicio_texto}")
-        print(f"Fecha de fin: {fecha_fin_texto}")
-        print(f"Días solicitados: {dias_solicitados}")
+        print(
+            f"Días disponibles: {empleado['dias_vacaciones']}"
+        )
 
     else:
         print("Legajo no encontrado.")
