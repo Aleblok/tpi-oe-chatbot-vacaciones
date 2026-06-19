@@ -38,14 +38,19 @@ El chatbot solicita al usuario:
 Luego el sistema:
 
 1. Valida si el legajo existe.
+
 2. Valida el formato de fechas.
+
 3. Calcula los días solicitados.
+
 4. Consulta los días disponibles del empleado.
+
 5. Determina el estado de la solicitud:
 
    * APROBADA
    * RECHAZADA
    * PENDIENTE_SUPERVISOR
+
 6. Registra la solicitud en `solicitudes.csv`.
 
 ## Reglas de decisión
@@ -56,6 +61,21 @@ Luego el sistema:
 * Si el empleado no tiene días suficientes, la solicitud queda RECHAZADA.
 * Si el empleado tiene días suficientes y solicita hasta 10 días, queda APROBADA.
 * Si el empleado tiene días suficientes pero solicita más de 10 días, queda PENDIENTE_SUPERVISOR.
+
+## Organización del trabajo en GitHub
+
+El proyecto fue desarrollado utilizando Git y GitHub como herramientas de control de versiones.
+
+Se creó una rama `desarrollo` como rama de integración del proyecto. A partir de ella, se trabajaron las funcionalidades principales en ramas separadas, que luego fueron integradas mediante Pull Requests.
+
+Ramas utilizadas:
+
+* `estructura-inicial`
+* `validacion-fechas`
+* `reglas-aprobacion`
+* `registro-solicitudes`
+
+Esta organización permitió dividir el trabajo por etapas, registrar los cambios realizados y mantener una trazabilidad entre el desarrollo del código y el proceso modelado.
 
 ## Ejecución
 
@@ -69,3 +89,4 @@ python main.py
 
 * Alessandra Borges Licciardi
 * Lautaro Borges Licciardi
+
