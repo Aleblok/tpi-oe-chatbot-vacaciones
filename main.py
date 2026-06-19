@@ -23,6 +23,16 @@ def validar_fecha(texto):
         return None
 
 
+def evaluar_solicitud(dias_solicitados, dias_disponibles):
+    if dias_solicitados > dias_disponibles:
+        return "RECHAZADA", "No dispone de suficientes días de vacaciones."
+
+    if dias_solicitados > 10:
+        return "PENDIENTE_SUPERVISOR", "La solicitud será derivada a supervisión para su evaluación."
+
+    return "APROBADA", "Solicitud aprobada automáticamente."
+
+
 def main():
     print("=== CHATBOT DE GESTIÓN DE VACACIONES ===")
 
@@ -50,16 +60,21 @@ def main():
             print("Fecha de fin inválida. Use el formato dd/mm/yyyy.")
             return
 
-        if fecha_fin < fecha_inicio:
-            print("La fecha de fin no puede ser anterior a la fecha de inicio.")
+        if fecha_fin <= fecha_inicio:
+            print("La fecha de fin debe ser posterior a la fecha de inicio.")
             return
 
         dias_solicitados = (fecha_fin - fecha_inicio).days
+        dias_disponibles = int(empleado["dias_vacaciones"])
+
+        estado, observacion = evaluar_solicitud(dias_solicitados, dias_disponibles)
 
         print("Solicitud procesada correctamente.")
         print(f"Fecha de inicio: {fecha_inicio_texto}")
         print(f"Fecha de fin: {fecha_fin_texto}")
         print(f"Días solicitados: {dias_solicitados}")
+        print(f"Estado: {estado}")
+        print(f"Observación: {observacion}")
 
     else:
         print("Legajo no encontrado.")
